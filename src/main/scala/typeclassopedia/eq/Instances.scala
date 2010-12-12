@@ -6,7 +6,7 @@ object instances {
     new Eq[ Option[A] ] {
 	  def eq( o1 :Option[A])( o2 :Option[A] ) : Boolean = {
 	    (o1,o2) match {
-          case ( Some(x), Some(y) )	=> aEq.equals( x, y )
+          case ( Some(x), Some(y) )	=> aEq.eq( x )( y )
           case ( None, None )		=> true
           case _					=> false	      
 	    }
@@ -17,7 +17,7 @@ object instances {
   implicit def pairEq[A,B](implicit aEq: Eq[A], bEq: Eq[B]): Eq[ (A,B) ] =
     new Eq[ (A,B) ] {  
       def eq(t1: (A,B))( t2: (A,B)) =
-        aEq.equals( t1._1, t2._1) && bEq.equals( t1._2, t2._2)
+        aEq.eq( t1._1)( t2._1) && bEq.eq( t1._2)( t2._2)
     }
 
   
