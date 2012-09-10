@@ -1,10 +1,15 @@
 package typeclassopedia.monoid
 
-object Instances {
+object instances {
 
-  implicit object IntMonoid extends Monoid[Int]{
+  implicit object IntSumMonoid extends Monoid[Int]{
     def add(x : Int, y : Int): Int = x + y
     def unit : Int = 0
+  }
+  
+  implicit object IntProductMonoid extends Monoid[Int]{
+    def add(x : Int, y : Int): Int = x * y
+    def unit : Int = 1	  
   }
 
   
@@ -26,4 +31,13 @@ object Instances {
     
       def unit : Option[A] = None
     }
+  
+  
+  implicit def listMonoid[A] : Monoid[List[A]] = new Monoid[List[A]]{
+    def add(x : List[A], y : List[A]): List[A] = x ::: y
+    def unit : List[A] = Nil	  
+  }
+  
+  
+  
 }
